@@ -15,5 +15,3 @@ services:
       - "3000:3000"
       - "3001:3001"
       - "3002:3002"
-    volumes:
-      - "/D/kencinas/data/docker/aerospike:/opt/aerospike/test" 
