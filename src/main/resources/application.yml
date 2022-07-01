@@ -1,0 +1,54 @@
+spring:  
+  jackson:
+    default-property-inclusion: NON_NULL
+  application:
+    name: application
+  aerospike:
+    hosts: localhost:3000
+    write:
+      send-key: true
+  data:
+    aerospike:      
+      namespace: test        
+      scans-enabled: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1MB
+      max-request-size: 1MB  
+server:  
+  port: 8080
+management:  
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+resilience4j:
+  thread-pool-bulkhead:
+    instances:
+      GetSymbolsFromBlockchainExchangeRepository:
+        max-thread-pool-size: 1
+        core-thread-pool-size: 1      
+  timelimiter:
+    instances:
+      GetSymbolsFromBlockchainExchangeRepository:
+        timeout-duration: 3s
+      GetBookOrderFromBlockChainExchangeRepository:
+        timeout-duration: 3s
+  circuitbreaker:
+    instances:
+      GetSymbolsFromBlockchainExchangeRepository:
+        wait-duration-in-open-state: 1s
+      GetBookOrderFromBlockChainExchangeRepository: 
+        wait-duration-in-open-state: 1s
+    metrics:
+      enabled: true
+      
+      

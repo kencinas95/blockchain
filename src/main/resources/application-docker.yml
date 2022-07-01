@@ -1,0 +1,3 @@
+spring:
+    aerospike:
+        hosts: cache:3000
